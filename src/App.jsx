@@ -20,6 +20,9 @@ function App() {
     ],
   };
   async function askQuestion() {
+    if(!question){
+      return false
+    }
     if (localStorage.getItem('history')) {
       let history = JSON.parse(localStorage.getItem('history'))
       history = [question, ...history]
@@ -30,7 +33,7 @@ function App() {
       setRecentHistory([question])
     }
 
-    console.log(recentHistory)
+    // console.log(recentHistory)
     let response = await fetch(URL, {
       method: "POST",
       body: JSON.stringify(payload),
@@ -46,11 +49,20 @@ function App() {
       { type: "q", text: question },
       { type: "a", text: dataString },
     ]);
+    setQuestion('')
   }
   // console.log(result)
 const clearHistory = () => {
   localStorage.clear();
   setRecentHistory([])
+}
+
+const isEnter = (event) => {
+console.log(event.key)
+if(event.key == "Enter"){
+  askQuestion();
+
+}
 }
 
   return (
@@ -116,6 +128,7 @@ const clearHistory = () => {
             className=" w-full h-15 p-3 outline-none"
             value={question}
             onChange={(e) => setQuestion(e.target.value)}
+            onKeyDown={isEnter}
             type="text"
             placeholder="Ask me Anything"
           />
