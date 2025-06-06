@@ -9,7 +9,7 @@ function QuestionAnswer({item , index}) {
                 >
                   {item.type == "q" ? (
                     <li
-                      className="text-right p-2 border-5 bg-zinc-700 border-zinc-700 rounded-tl-3xl rounded-bl-3xl rounded-br-3xl w-fit "
+                      className="text-right dark:text-zinc-200 text-zinc-800 p-2 border-5 dark:bg-zinc-700  dark:border-zinc-700 bg-red-100 border-red-100 rounded-tl-3xl rounded-bl-3xl rounded-br-3xl w-fit "
                       key={index + Math.random()}
                     >
                       <Answer
@@ -21,7 +21,7 @@ function QuestionAnswer({item , index}) {
                     </li>
                   ) : (
                     item.text.map((ansitem, ansIndex) => (
-                      <li className="text-left p-2" key={index + Math.random()}>
+                      <li className="text-left p-2 dark:text-zinc-200 text-zinc-800" key={index + Math.random()}>
                         <Answer
                           ans={ansitem}
                           index={ansIndex}

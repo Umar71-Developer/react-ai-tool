@@ -2,12 +2,13 @@ import React from 'react'
 
 function RecentSearch({clearHistory , recentHistory , setSelectedHistory}) {
   return (
-    <div className="col-span-1 bg-zinc-700">
-        <h1 className="text-lg text-white pt-3 flex justify-center items-center">
+    <div className="col-span-1 dark:bg-zinc-700 bg-red-100">
+        <h1 className="text-lg dark:text-white text-zinc-800  pt-3 flex justify-center items-center">
           
           <span>Recent History</span>
           <button onClick={clearHistory} className="cursor-pointer">
-            <svg
+            <svg 
+            
               xmlns="http://www.w3.org/2000/svg"
               height="20px"
               viewBox="0 -960 960 960"
@@ -24,7 +25,7 @@ function RecentSearch({clearHistory , recentHistory , setSelectedHistory}) {
             recentHistory.map((item, index) => (
               <li
                 onClick={() => setSelectedHistory(item)}
-                className="p-0.5 pl-5 cursor-pointer text-zinc-400 hover:bg-zinc-800 hover:text-zinc-200 truncate"
+                className="p-0.5 pl-5 cursor-pointer dark:text-zinc-400 text-zinc-800 dark:hover:bg-zinc-800 dark:hover:text-zinc-200 truncate hover:bg-red-200 hover:text-zinc-800"
                 key={index + Math.random()}
               >
                 {item}

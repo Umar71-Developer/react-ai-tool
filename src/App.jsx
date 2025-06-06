@@ -88,8 +88,24 @@ function App() {
     askQuestion()
   }, [selectedHistory]);
 
+/* Dark mode features start */
+const [darkMode , setDarkMode] = useState('dark')
+useEffect(()=>{
+console.log(darkMode)
+if(darkMode == 'dark'){
+document.documentElement.classList.add('dark')
+}else{
+document.documentElement.classList.remove('dark')
+}
+},[darkMode])
+/* Dark mode features end */
   return (
+    <div className={darkMode == 'dark' ? 'dark' : 'light'}>
     <div className="grid grid-cols-5 h-screen text-center">
+      <select onChange={(event)=> setDarkMode(event.target.value)} className="fixed dark:text-white dark:bg-zinc-800 text-zinc-800 bottom-0 p-5">
+        <option value="dark">Dark</option>
+        <option value="light">Light</option>
+      </select>
       <RecentSearch clearHistory={clearHistory} recentHistory={recentHistory} setSelectedHistory={setSelectedHistory} />
       <div className="col-span-4 p-10">
         
@@ -117,7 +133,7 @@ function App() {
         </ul> */}
           </div>
         </div>
-        <div className="bg-zinc-800 w-1/3 m-auto border border-zinc-600 rounded-4xl flex text-white pr-5 ">
+        <div className="dark:bg-zinc-800 bg-red-100  w-1/3 m-auto border border-zinc-600 rounded-4xl flex dark:text-white text-zinc-800 pr-5 ">
           <input
             className=" w-full h-15 p-3 outline-none"
             value={question}
@@ -131,6 +147,7 @@ function App() {
           </button>
         </div>
       </div>
+    </div>
     </div>
   );
 }
