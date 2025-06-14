@@ -23,7 +23,12 @@ function App() {
     if (question) {
       if (localStorage.getItem("history")) {
         let history = JSON.parse(localStorage.getItem("history"));
+        // history = history.slice(0,19);
         history = [question, ...history];
+        history = history.map((item) => 
+          item.charAt(0).toUpperCase()+item.slice(1).trim()
+        )
+        history = [...new Set(history)]
         localStorage.setItem("history", JSON.stringify(history));
         setRecentHistory(history);
       } else {
@@ -77,21 +82,21 @@ function App() {
   };
 
   const isEnter = (event) => {
-    console.log(event.key);
+    // console.log(event.key);
     if (event.key == "Enter") {
       askQuestion();
     }
   };
 
   useEffect(() => {
-    console.log(selectedHistory);
+    // console.log(selectedHistory);
     askQuestion()
   }, [selectedHistory]);
 
 /* Dark mode features start */
 const [darkMode , setDarkMode] = useState('dark')
 useEffect(()=>{
-console.log(darkMode)
+// console.log(darkMode)
 if(darkMode == 'dark'){
 document.documentElement.classList.add('dark')
 }else{
@@ -106,7 +111,7 @@ document.documentElement.classList.remove('dark')
         <option value="dark">Dark</option>
         <option value="light">Light</option>
       </select>
-      <RecentSearch clearHistory={clearHistory} recentHistory={recentHistory} setSelectedHistory={setSelectedHistory} />
+      <RecentSearch clearHistory={clearHistory} setRecentHistory={setRecentHistory} recentHistory={recentHistory} setSelectedHistory={setSelectedHistory} />
       <div className="col-span-4 p-10">
         
         <div ref={scrollToAns} className="container overflow-auto h-160">
